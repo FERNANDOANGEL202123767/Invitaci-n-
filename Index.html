@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invitación - Ian Alejandro</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #000080; /* Azul oscuro como tema Sonic */
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+        .invitation {
+            text-align: center;
+            padding: 20px;
+            border: 5px dashed #ff0; /* Borde amarillo para destacar */
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            animation: bounce 2s infinite;
+        }
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-20px); }
+            60% { transform: translateY(-10px); }
+        }
+        .sonic {
+            font-size: 2.5em;
+            color: #00f; /* Azul Sonic */
+            text-shadow: 2px 2px 4px #ff0;
+            animation: spin 4s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .details {
+            font-size: 1.2em;
+            margin-top: 20px;
+        }
+        .balloon {
+            position: absolute;
+            width: 50px;
+            height: 70px;
+            background-color: #00f;
+            border-radius: 50%;
+            animation: float 4s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+        #balloon1 { top: 10%; left: 10%; }
+        #balloon2 { top: 20%; right: 10%; }
+    </style>
+</head>
+<body>
+    <div class="invitation">
+        <h1 class="sonic">¡Invitación Temática Sonic!</h1>
+        <div class="details">
+            <p><strong>Fecha:</strong> 19 de julio</p>
+            <p><strong>Hora:</strong> 3:00 PM</p>
+            <p><strong>Lugar:</strong> Auditorio del Ejido de Coscomate</p>
+            <p><strong>Festejado:</strong> Ian Alejandro Soria Garcia</p>
+            <p><strong>Motivo:</strong> Salida del Kinder - Graduación</p>
+            <p><strong>Padrinos:</strong> Noe y Claudia</p>
+            <p>¡Te esperamos para celebrar a lo Sonic! 🎉</p>
+        </div>
+    </div>
+    <div class="balloon" id="balloon1"></div>
+    <div class="balloon" id="balloon2"></div>
+
+    <script>
+        // Simple animation effect with JavaScript (optional enhancement)
+        setInterval(() => {
+            const invitation = document.querySelector('.invitation');
+            invitation.style.borderColor = '#' + Math.floor(Math.random()*16777215).toString(16);
+        }, 1000);
+    </script>
+</body>
+</html>
