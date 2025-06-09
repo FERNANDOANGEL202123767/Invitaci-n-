@@ -89,24 +89,143 @@
         
         .details {
             background: rgba(0, 102, 204, 0.05);
-            padding: 20px;
+            padding: 25px;
             border-radius: 15px;
             margin-top: 20px;
             border: 2px solid rgba(255, 215, 0, 0.4);
             backdrop-filter: blur(1px);
+            position: relative;
+            overflow: hidden;
+            animation: detailsGlow 4s ease-in-out infinite alternate;
+        }
+        
+        @keyframes detailsGlow {
+            from {
+                box-shadow: 0 0 15px rgba(255, 215, 0, 0.3);
+                border-color: rgba(255, 215, 0, 0.4);
+            }
+            to {
+                box-shadow: 0 0 25px rgba(255, 215, 0, 0.6), 0 0 35px rgba(0, 255, 127, 0.2);
+                border-color: rgba(255, 215, 0, 0.7);
+            }
+        }
+        
+        .details::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255, 215, 0, 0.1), transparent);
+            animation: shimmer 6s linear infinite;
+        }
+        
+        @keyframes shimmer {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
         }
         
         .details p {
             font-size: 1.1em;
-            margin: 12px 0;
+            margin: 15px 0;
             line-height: 1.6;
             color: #003366;
             font-weight: 600;
+            position: relative;
+            animation: slideInLeft 0.6s ease-out forwards;
+            opacity: 0;
+            transform: translateX(-30px);
         }
+        
+        .details p:nth-child(1) { animation-delay: 0.2s; }
+        .details p:nth-child(2) { animation-delay: 0.4s; }
+        .details p:nth-child(3) { animation-delay: 0.6s; }
+        .details p:nth-child(4) { animation-delay: 0.8s; }
+        .details p:nth-child(5) { animation-delay: 1.0s; }
+        .details p:nth-child(6) { animation-delay: 1.2s; }
+        
+        @keyframes slideInLeft {
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        .details p::before {
+            content: '💎';
+            position: absolute;
+            left: -25px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 0.8em;
+            animation: bounce 2s ease-in-out infinite;
+            animation-delay: var(--delay, 0s);
+        }
+        
+        .details p:nth-child(1)::before { --delay: 0s; content: '📅'; }
+        .details p:nth-child(2)::before { --delay: 0.3s; content: '⏰'; }
+        .details p:nth-child(3)::before { --delay: 0.6s; content: '📍'; }
+        .details p:nth-child(4)::before { --delay: 0.9s; content: '🎉'; }
+        .details p:nth-child(5)::before { --delay: 1.2s; content: '🎓'; }
+        .details p:nth-child(6)::before { --delay: 1.5s; content: '👑'; }
         
         .details strong {
             color: #0066CC;
             text-shadow: 1px 1px 0px rgba(255, 215, 0, 0.3);
+            position: relative;
+            animation: textPulse 3s ease-in-out infinite;
+        }
+        
+        @keyframes textPulse {
+            0%, 100% { 
+                text-shadow: 1px 1px 0px rgba(255, 215, 0, 0.3);
+                transform: scale(1);
+            }
+            50% { 
+                text-shadow: 2px 2px 0px rgba(255, 215, 0, 0.6), 0 0 10px rgba(0, 255, 127, 0.3);
+                transform: scale(1.02);
+            }
+        }
+        
+        .info-stars {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: #FFD700;
+            border-radius: 50%;
+            animation: starTwinkle 2s ease-in-out infinite;
+        }
+        
+        @keyframes starTwinkle {
+            0%, 100% { 
+                opacity: 0.3;
+                transform: scale(0.5);
+            }
+            50% { 
+                opacity: 1;
+                transform: scale(1.2);
+            }
+        }
+        
+        .rain-drop {
+            position: absolute;
+            width: 3px;
+            height: 15px;
+            background: linear-gradient(to bottom, rgba(255, 215, 0, 0.8), transparent);
+            border-radius: 50% 50% 0 0;
+            animation: rainFall 3s linear infinite;
+        }
+        
+        @keyframes rainFall {
+            0% {
+                top: -20px;
+                opacity: 1;
+            }
+            100% {
+                top: 100%;
+                opacity: 0;
+            }
         }
         
         .celebration {
@@ -317,13 +436,48 @@
             }
         }
         
+        // Crear estrellas flotantes en la sección de detalles
+        function createInfoStars() {
+            const detailsSection = document.querySelector('.details');
+            if (!detailsSection) return;
+            
+            for (let i = 0; i < 6; i++) {
+                const star = document.createElement('div');
+                star.className = 'info-stars';
+                star.style.top = Math.random() * 100 + '%';
+                star.style.left = Math.random() * 100 + '%';
+                star.style.animationDelay = Math.random() * 2 + 's';
+                star.style.animationDuration = (1.5 + Math.random() * 1) + 's';
+                detailsSection.appendChild(star);
+            }
+        }
+        
+        // Crear lluvia dorada en la sección de detalles
+        function createGoldenRain() {
+            const detailsSection = document.querySelector('.details');
+            if (!detailsSection) return;
+            
+            for (let i = 0; i < 8; i++) {
+                const drop = document.createElement('div');
+                drop.className = 'rain-drop';
+                drop.style.left = Math.random() * 100 + '%';
+                drop.style.animationDelay = Math.random() * 3 + 's';
+                drop.style.animationDuration = (2 + Math.random() * 2) + 's';
+                detailsSection.appendChild(drop);
+            }
+        }
+        
         // Función para limpiar elementos antiguos
         function cleanup() {
             const oldRings = document.querySelectorAll('.ring');
             const oldParticles = document.querySelectorAll('.particle');
+            const oldStars = document.querySelectorAll('.info-stars');
+            const oldRain = document.querySelectorAll('.rain-drop');
             
             oldRings.forEach(ring => ring.remove());
             oldParticles.forEach(particle => particle.remove());
+            oldStars.forEach(star => star.remove());
+            oldRain.forEach(drop => drop.remove());
         }
         
         // Función para regenerar efectos
@@ -337,6 +491,8 @@
             
             createRings(ringCount);
             createParticles(particleCount);
+            createInfoStars();
+            createGoldenRain();
         }
         
         // Inicializar efectos
