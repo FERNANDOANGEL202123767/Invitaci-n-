@@ -4,13 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Invitación - Ian Alejandro</title>
-    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <style>
         body {
             margin: 0;
-            font-family: 'Press Start 2P', Arial, sans-serif;
-            background-color: #000080; /* Azul oscuro Sonic */
-            color: #fff;
+            font-family: 'Roboto', Arial, sans-serif;
+            background: linear-gradient(to bottom, #87CEEB, #fff);
+            color: #000;
             overflow: hidden;
             position: relative;
             height: 100vh;
@@ -22,51 +22,36 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            background: rgba(255, 255, 255, 0.1);
-            border: 5px dashed #ff0; /* Borde amarillo */
+            background: rgba(255, 255, 255, 0.8);
             border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             animation: fadeIn 2s ease-in;
+            max-width: 600px;
+            width: 90%;
         }
         @keyframes fadeIn {
             from { opacity: 0; }
             to { opacity: 1; }
         }
         h1 {
-            font-size: 2em;
-            color: #00f;
-            text-shadow: 2px 2px 4px #ff0;
+            font-family: 'Press Start 2P', cursive;
+            font-size: 1.5em;
+            color: #0000FF;
+            text-shadow: 2px 2px 4px #FF0;
+            margin-bottom: 20px;
         }
-        .details {
+        .details p {
             font-size: 1em;
-            margin-top: 20px;
+            margin: 10px 0;
             line-height: 1.5;
         }
         .sonic {
-            position: absolute;
-            width: 150px;
-            height: auto;
-            animation: run 5s linear infinite;
-            bottom: 10px;
-            left: -10%;
+            display: block;
+            margin: 0 auto 20px;
+            max-width: 600px;
+            width: 100%;
+            border-radius: 10px;
         }
-        @keyframes run {
-            0% { left: -10%; }
-            100% { left: 110%; }
-        }
-        .balloon {
-            position: absolute;
-            width: 50px;
-            height: 70px;
-            background-color: #00f;
-            border-radius: 50%;
-            animation: float 4s ease-in-out infinite;
-        }
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-20px); }
-        }
-        #balloon1 { top: 10%; left: 10%; animation-delay: 0s; }
-        #balloon2 { top: 20%; right: 10%; animation-delay: 2s; }
         .ring {
             position: absolute;
             width: 40px;
@@ -81,10 +66,16 @@
         }
         #ring1 { top: 30%; left: 20%; }
         #ring2 { top: 40%; right: 20%; }
+        @media (max-width: 600px) {
+            h1 { font-size: 1.2em; }
+            .details p { font-size: 0.9em; }
+            .ring { display: none; }
+        }
     </style>
 </head>
 <body>
     <div class="container">
+        <img src="https://media.giphy.com/media/3o7TKz2e4d0Yp5O4Vy/giphy.gif" alt="Sonic Running" class="sonic">
         <h1>¡Invitación Temática Sonic!</h1>
         <div class="details">
             <p><strong>Fecha:</strong> 19 de julio</p>
@@ -96,18 +87,7 @@
             <p>¡Te esperamos para celebrar a lo Sonic! 🎉</p>
         </div>
     </div>
-    <img src="https://i.imgur.com/sonic-running.gif" alt="Sonic Running" class="sonic">
-    <div class="balloon" id="balloon1"></div>
-    <div class="balloon" id="balloon2"></div>
     <div class="ring" id="ring1"></div>
     <div class="ring" id="ring2"></div>
-
-    <script>
-        // Optional: Add random border color change for extra fun
-        setInterval(() => {
-            const container = document.querySelector('.container');
-            container.style.borderColor = '#' + Math.floor(Math.random()*16777215).toString(16);
-        }, 1000);
-    </script>
 </body>
 </html>
